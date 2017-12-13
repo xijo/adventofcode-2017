@@ -1,3 +1,5 @@
+# https://www.redblobgames.com/grids/hexagons/#distances
+
 defmodule HexGrid do
   def follow_path(path) do
     path
