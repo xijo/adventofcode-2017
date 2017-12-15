@@ -31,11 +31,26 @@ defmodule GeneratorTest do
   test "binary_tail", do: assert Judge.binary_tail(245556042) == 58186
 end
 
-gen1 = Stream.unfold({618, 16807}, &Generator.next/1)
-gen2 = Stream.unfold({814, 48271}, &Generator.next/1)
+# --- Part One ---
+
+# gen1 = Stream.unfold({618, 16807}, &Generator.next/1)
+# gen2 = Stream.unfold({814, 48271}, &Generator.next/1)
+#
+# Stream.zip(gen1, gen2)
+# |> Enum.take(40_000_000)
+# |> Stream.filter(&Judge.match?/1)
+# |> Enum.to_list
+# |> length
+# |> IO.inspect
+
+
+# --- Part Two ---
+
+gen1 = Stream.unfold({618, 16807}, &Generator.next/1) |> Stream.filter(fn(x) -> rem(x, 4) == 0 end)
+gen2 = Stream.unfold({814, 48271}, &Generator.next/1) |> Stream.filter(fn(x) -> rem(x, 8) == 0 end)
 
 Stream.zip(gen1, gen2)
-|> Enum.take(40_000_000)
+|> Enum.take(5_000_000)
 |> Stream.filter(&Judge.match?/1)
 |> Enum.to_list
 |> length
