@@ -11,4 +11,14 @@ defmodule Grid do
       Map.put acc, index, line
     end)
   end
+
+  def at(grid, {x,y}) do
+    row = grid[x] || %{}
+    row[y]
+  end
+
+  def put(grid, {x,y}, value) do
+    row = grid[x] || %{}
+    Map.put grid, x, Map.put(row, y, value)
+  end
 end
