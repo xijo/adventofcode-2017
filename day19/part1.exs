@@ -52,16 +52,9 @@ defmodule Network do
   def present?(_), do: true
 end
 
-net = File.read!("input.txt")
-|> String.split("\n")
-|> Enum.with_index
-|> Enum.reduce(%{}, fn({line, index}, acc) ->
-  line = line
-  |> String.graphemes
-  |> Enum.with_index
-  |> Enum.reduce(%{}, fn {c, i}, a -> Map.put a, i, c end)
-  Map.put acc, index, line
-end)
+Code.require_file("../lib/grid.exs")
+
+net = Grid.read("input.txt")
 
 # Network.crumbs(net, {0,4}, :down, []) |> IO.inspect
 Network.crumbs(net, {0,59}, :down, []) |> IO.inspect
